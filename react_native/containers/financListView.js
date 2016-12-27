@@ -16,8 +16,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import  FetchData from '../react_native/utils/FetchData';
-import ListViewItem from  './componets/ListViewItem';
+import  FetchData from '../utils/FetchData';
+import ListViewItem from  '../componets/ListViewItem';
 export default class App extends Component {
     constructor(props) {
         super(props);
