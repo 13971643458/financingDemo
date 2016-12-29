@@ -17,6 +17,7 @@ export default class Modify {
 			let index = this._random(0, this.length - 1);
 			data.push(this.list[index]);
 		}
+
 		return {list: data};
 	}
 

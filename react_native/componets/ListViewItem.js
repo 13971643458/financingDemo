@@ -22,6 +22,7 @@ export default class ListViewItem extends Component {
     constructor(props) {
         super(props)
         const str = this.props.rowData.prdTips;
+        console.log("***********  "+str);
         strs = str.split(",");
     }
 
@@ -31,58 +32,28 @@ export default class ListViewItem extends Component {
                 <Text style={styles.finacnText}>
                     {this.props.rowData.prdTypeExplain + "理财"}
                 </Text>
-                <View style={styles.flex}>
-                    <View style={styles.container}>
-                        <View style={styles.item}>
-                            <View style={styles.viewYield}>
-                                <Text style={styles.textYield}>
-                                    {this.props.rowData.yield}
-                                </Text>
-                                <Text style={styles.textYieldUnit}>
-                                    {this.props.rowData.yieldUnit}
-                                </Text>
-                            </View>
-                            <Text style={styles.textYieldName}>
-                                {this.props.rowData.yieldName}
-                            </Text>
-                        </View>
-                        <View style={styles.item}>
-                            <Text style={styles.textItem}>
-                                {this.props.rowData.prdName}
-                            </Text>
-                            <View style={styles.viewYield}>
-                                <Text style={styles.textItem}>
-                                    {this.props.rowData.timeLimit}
-                                </Text>
-                                <Text style={styles.textItem}>
-                                    {this.props.rowData.timelimitUnit}
-                                </Text>
-                                <Text style={styles.textPfirstAmt}>
-                                    |
-                                </Text>
-                                <Text style={styles.textPfirstAmt}>
-                                    {this.props.rowData.pfirstAmt}
-                                </Text>
-                                <Text style={styles.textItem}>
-                                    {this.props.rowData.pfirstAmtUnit}
+
+                <View style={styles.container}>
+                    {this.itemLeft()}
+
+                    <View style={styles.item}>
+                        <Text style={styles.textItem}>
+                            {this.props.rowData.prdName}
+                        </Text>
+                        {this.itemRight()}
+
+                        <View style={styles.viewYield}>
+                            <View style={styles.viewPrdTips}>
+                                <Text style={styles.textPrdTips}>
+                                    {strs[0]}
                                 </Text>
                             </View>
 
-                            <View style={styles.viewYield}>
-
-                                <View style={styles.viewPrdTips}>
-                                    <Text style={styles.textPrdTips}>
-                                        {strs[0]}
-                                    </Text>
-                                </View>
-
-                                <View style={[styles.viewPrdTips,styles.viewPrdTipsLeft]}>
-                                    <Text style={styles.textPrdTips}>
-                                        {strs[1]}
-                                    </Text>
-                                </View>
+                            <View style={[styles.viewPrdTips, styles.viewPrdTipsLeft]}>
+                                <Text style={styles.textPrdTips}>
+                                    {strs[1]}
+                                </Text>
                             </View>
-
                         </View>
                     </View>
                 </View>
@@ -90,13 +61,56 @@ export default class ListViewItem extends Component {
         );
     }
 
+    itemLeft() {
+
+        return (<View style={styles.item}>
+            <View style={styles.viewYield}>
+                <Text style={styles.textYield}>
+                    {this.props.rowData.yield}
+                </Text>
+                <Text style={styles.textYieldUnit}>
+                    {this.props.rowData.yieldUnit}
+                </Text>
+            </View>
+            <Text style={styles.textYieldName}>
+                {this.props.rowData.yieldName}
+            </Text>
+        </View>);
+
+    }
+
+    itemRight() {
+
+        return (<View style={styles.viewYield}>
+                <Text style={styles.textItem}>
+                    {this.props.rowData.timeLimit}
+                </Text>
+                <Text style={styles.textItem}>
+                    {this.props.rowData.timelimitUnit}
+                </Text>
+                <Text style={styles.textPfirstAmt}>
+                    |
+                </Text>
+                <Text style={styles.textPfirstAmt}>
+                    {this.props.rowData.pfirstAmt}
+                </Text>
+                <Text style={styles.textItem}>
+                    {this.props.rowData.pfirstAmtUnit}
+                </Text>
+            </View>
+        );
+    }
+
+    // itemRightButtom(){
+    //
+    //     return();
+    // }
+
 }
 
 const styles = StyleSheet.create({
-    flex: {
-        flex: 1,
-    },
     container: {
+        flex: 1,
         marginLeft: 3 * a,
         marginRight: 3 * a,
         flexDirection: 'row',
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
         marginTop: a,
         flexDirection: "row"// row column
     },
-    viewPrdTipsLeft:{
+    viewPrdTipsLeft: {
         marginLeft: Font.T1,
     },
     item: {
@@ -158,6 +172,6 @@ const styles = StyleSheet.create({
     textPfirstAmt: {
         fontSize: Font.T2,
         color: '#333333',
-        marginLeft:  Font.T1,
+        marginLeft: Font.T1,
     }
 });
