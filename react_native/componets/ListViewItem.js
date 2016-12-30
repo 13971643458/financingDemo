@@ -22,13 +22,12 @@ export default class ListViewItem extends Component {
     constructor(props) {
         super(props)
         const str = this.props.rowData.prdTips;
-        console.log("***********  "+str);
         strs = str.split(",");
     }
 
     render() {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.viewGroup}>
                 <Text style={styles.finacnText}>
                     {this.props.rowData.prdTypeExplain + "理财"}
                 </Text>
@@ -62,7 +61,6 @@ export default class ListViewItem extends Component {
     }
 
     itemLeft() {
-
         return (<View style={styles.item}>
             <View style={styles.viewYield}>
                 <Text style={styles.textYield}>
@@ -76,11 +74,9 @@ export default class ListViewItem extends Component {
                 {this.props.rowData.yieldName}
             </Text>
         </View>);
-
     }
 
     itemRight() {
-
         return (<View style={styles.viewYield}>
                 <Text style={styles.textItem}>
                     {this.props.rowData.timeLimit}
@@ -100,26 +96,22 @@ export default class ListViewItem extends Component {
             </View>
         );
     }
-
-    // itemRightButtom(){
-    //
-    //     return();
-    // }
-
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'row',
+    },
+    viewGroup: {
         marginLeft: 3 * a,
         marginRight: 3 * a,
-        flexDirection: 'row',
+        marginBottom: 1.5 * a,
+        marginTop: 1.5 * a,
     },
     finacnText: {
         color: '#333333',
         fontSize: Font.T2,
-        marginLeft: 3 * a,
-        marginTop: 3 * a,
     },
     viewPrdTips: {
         marginTop: a,
@@ -131,7 +123,7 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         justifyContent: 'center',
-        marginBottom: 3 * a,
+
     },
     listViewStyle: {
         flexDirection: 'column',

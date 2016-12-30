@@ -16,6 +16,9 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import {Font, Grid} from '../theme/dimens';
+const {A, a} = Grid;
+
 import  FetchData from '../utils/FetchData';
 import ListViewItem from  '../componets/ListViewItem';
 export default class App extends Component {
@@ -50,36 +53,79 @@ export default class App extends Component {
             <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow}
-                renderSeparator={this.renderSeparator}
                 contentContainerStyle={styles.listViewStyle}
                 renderSectionHeader={this.renderSectionHeader}
             />
         );
     }
 
-    // 每一行中的数据
+    /**
+     * 每一行中的数据
+     * @param rowData
+     * @returns {XML}
+     */
     renderRow(rowData) {
         return (
             <ListViewItem rowData={rowData}/>
         );
     }
 
-    //分割线的样式
+    /**
+     * listview分割线的样式
+     * @param sectionID
+     * @param rowID
+     * @returns {XML}
+     */
     renderSeparator(sectionID, rowID) {
         return (
             <View style={styles.separator} key={sectionID + rowID}></View>
         );
     }
 
-    // 每一组对应的数据
+    /**
+     * 每一组对应的数据
+     * @param sectionData
+     * @returns {XML}
+     */
     renderSectionHeader(sectionData) {
-        return (
-            <View style={styles.sectionView}>
-                <Text style={styles.sectionTitle}>{sectionData}</Text>
-            </View>
-        );
+        if (sectionData == '定期') {
+            return (
+                <View style={styles.sectionView}>
+                    <View style={styles.lineView_1}/>
+                    <Text style={styles.sectionTitle_1}>{sectionData}</Text>
+                    <Text style={styles.sectionTitle_2}>定期理财,稳健收益</Text>
+                </View>
+            );
+        } else if (sectionData == '活期') {
+            return (
+                <View style={styles.sectionView}>
+                    <View style={styles.lineView_2}/>
+                    <Text style={styles.sectionTitle_1}>{sectionData}</Text>
+                    <Text style={styles.sectionTitle_2}>活期理财,灵活存取</Text>
+                </View>
+            );
+        } else if (sectionData == '存款') {
+            return (
+                <View style={styles.sectionView}>
+                    <View style={styles.lineView_3}/>
+                    <Text style={styles.sectionTitle_1}>{sectionData}</Text>
+                    <Text style={styles.sectionTitle_2}>智能存款,固定收益</Text>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View style={styles.sectionView}>
+                    <Text style={styles.sectionTitle}>{"dd"}</Text>
+                </View>
+            );
+        }
     }
 
+    /**
+     * 数据的分组
+     * @constructor
+     */
     RefactorData() {
         var data = new FetchData().get().list;
         var dataBlob = {};
@@ -127,17 +173,39 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap', //多行显示
     },
     separator: {
-        height: 20,
-        backgroundColor: '#999999'
+        height: 15,
+        backgroundColor: '#c3c3c3'
     },
     sectionView: {
-        height: 22,
+        height: 5 * a,
         backgroundColor: "#c3c3c3",
-        justifyContent: "center"
+        flexDirection: 'row',
+        alignItems:'center',
     },
-
-    sectionTitle: {
+    sectionTitle_1: {
         marginLeft: 16,
+        color: "#333333",
+        fontSize: Font.T1,
     },
+    sectionTitle_2: {
+        marginLeft: 16,
+        color: "#999999",
+        fontSize: Font.T2,
+    },
+    lineView_1: {
+        width: 5,
+        height: 5 * a,
+        backgroundColor: "#60b0ff",
+    },
+    lineView_2: {
+        width: 5,
+        height: 5 * a,
+        backgroundColor: "#f13a28",
+    },
+    lineView_3: {
+        width: 5,
+        height: 5 * a,
+        backgroundColor: "#ff8f44",
+    }
 });
 // module.exports = App;
