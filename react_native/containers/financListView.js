@@ -13,14 +13,18 @@ import {
     TextInput,
     Alert,
     ListView,
+    Image,
     TouchableOpacity
 } from 'react-native';
 
+import Dimensions from 'Dimensions';
 import {Font, Grid} from '../theme/dimens';
 const {A, a} = Grid;
 
 import  FetchData from '../utils/FetchData';
 import ListViewItem from  '../componets/ListViewItem';
+
+var width = Dimensions.get('window').width;
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -55,7 +59,21 @@ export default class App extends Component {
                 renderRow={this.renderRow}
                 contentContainerStyle={styles.listViewStyle}
                 renderSectionHeader={this.renderSectionHeader}
+                renderHeader={this.renderHeader}
             />
+        );
+    }
+
+    /**
+     * listview添加头部
+     * @returns {XML}
+     */
+    renderHeader() {
+        return (
+            <View style={[{marginBottom: 10,}]}>
+                <Image style={styles.image}
+                       source={require('../image/image_header.png')}></Image>
+            </View>
         );
     }
 
@@ -168,6 +186,10 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+    image: {
+        width: width,
+        height: 180,
+    },
     listViewStyle: {
         flexDirection: 'column',
         flexWrap: 'wrap', //多行显示
@@ -180,7 +202,7 @@ const styles = StyleSheet.create({
         height: 5 * a,
         backgroundColor: "#c3c3c3",
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
     },
     sectionTitle_1: {
         marginLeft: 16,
